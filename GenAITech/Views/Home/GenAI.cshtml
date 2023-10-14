@@ -1,0 +1,140 @@
+﻿@{
+    ViewData["Title"] = "Home Page";
+}
+
+@{
+    var tools = new List<dynamic>
+    {
+    new { title = "CHATGPT", image = "chatgpt_thumbnail.jpg",wikiImage="chatgpt_large.jpg",desc="ChatGPT is a large language model-based chatbot developed by OpenAI launched on November 30, 2022, notable for enabling users to refine and steer a conversation towards a desired length, format, style, level of detail, and language used. (Wikipedia)", },
+    new { title = "BARD", image = "bard_thumbnail.jpg",wikiImage="bard_large.jpg",desc="Bard is conversational generative artificial intelligence chatbot developed by Google, based initially on the LaMDA family of large language models and later the PaLM LLM. (Wikipedia)", },
+    new { title = "MIDJOURNEY", image = "midjourney_thumbnail.jpg",wikiImage="midjourney_large.jpg",desc="Midjourney is a generative artificial intelligence program and service created and hosted by San Francisco-based independent research lab Midjourney, Inc. (Wikipedia)", },
+    new { title = "DALL-E", image = "dalle_thumbnail.jpg",wikiImage="dalle_large.jpg",desc="DALL-E and DALL-E 2 are text-to-image models developed by OpenAI using deep learning methodologies to generate digital images from natural language descriptions, called prompts (Wikipedia)", },
+    };
+}
+
+@{
+    var organizations = new List<dynamic>
+    {
+    new { title = "MICROSOFT", image = "ms_thumbnail.jpg",wikiImage="ms_large.jpg",desc="Microsoft Corporation is an American multinational technology corporation headquartered in Redmond, Washington. Microsofts best-known software products are the Windows line of operating systems, the Microsoft 365 suite of productivity applications, and the Internet Explorer and Edge web browsers. (Wikipedia)", },
+    new { title = "GOOGLE", image = "google_thumbnail.jpg",wikiImage="google_large.jpg",desc="Google LLC is an American multinational technology company focusing on artificial intelligence, online advertising, search engine technology, cloud computing, computer software, quantum computing, e-commerce, and consumer electronics. (Wikipedia)", },
+    new { title = "IBM", image = "ibm_thumbnail.jpg",wikiImage="ibm_large.jpg",desc="The International Business Machines Corporation, nicknamed Big Blue, is an American multinational technology corporation headquartered in Armonk, New York and is present in over 175 countries. (Wikipedia)", },
+    new { title = "AMAZON", image = "amazon_thumbnail.jpg",wikiImage="amazon_large.jpg",desc="Amazon.com, Inc. is an American multinational technology company focusing on e-commerce, cloud computing, online advertising, digital streaming, and artificial intelligence. (Wikipedia) ", },
+    };
+}
+
+@{
+    var applications = new List<dynamic>
+    {
+    new { title = "Text: ChatGPT", image = "chatgpt_thumbnail.jpg",wikiImage="chatgpt_large.jpg",desc="ChatGPT is a large language model-based chatbot developed by OpenAI and launched on November 30, 2022, notable for enabling users to refine and steer a conversation towards a desired length, format, style, level of detail, and language used. (Wikipedia)", },
+    new { title = "Code: Github Copilot", image = "githubcopilot_thumbnail.jpg",wikiImage="githubcopilot_large.jpg",desc="GitHub Copilot is a cloud-based artificial intelligence tool developed by GitHub and OpenAI to assist users of Visual Studio Code, Visual Studio, Neovim, and JetBrains integrated development environments by autocompleting code. (Wikipedia)", },
+    new { title = "Image: DALL-E", image = "dalle_thumbnail.jpg",wikiImage="dalle_large.jpg",desc="DALL-E and DALL-E 2 are text-to-image models developed by OpenAI using deep learning methodologies to generate digital images from natural language descriptions, called \"prompts\". DALL-E was revealed by OpenAI in a blog post in January 2021, and uses a version of GPT-3 modified to generate images. (Wikipedia) ", },
+    new { title = "Video: Synthesia", image = "synthesia_thumbnail.jpg",wikiImage="synthesia_large.jpg",desc="Synthesia is a synthetic media generation platform used to create AI generated video content. Based in London, England, it counts among its users businesses including Amazon, Tiffany & Co. and IHG Hotels & Resorts. (Wikipedia)", }
+    };
+}
+
+
+
+<div id="drawer">
+    <div class="container pt-3 pb-2">
+        <button onclick="hideDrawer()" class="close-btn">X</button>
+        <div class="row w-100">
+            <div class="col-6 d-flex justify-content-center align-items-start">
+                <img id="dw-wikiImage" class="img-left" src="/assets/images/genai/chatgpt_large.jpg" alt="chatgpt_large">
+            </div>
+            <div class="col-6">
+                <div class="flex flex-column">
+                    <h2 id="dw-title" class="title-yellow-sm border-b-yellow">ChatGPT</h2>
+                    <button class="more-detail">More Details</button>
+                    <p id="dw-desc" class="text-secondary mt-2 fs-6">
+                        ChatGPT is a large language model-based chatbot developed by OpenAI and launched on
+                        November 30, 2022, notable for enabling users to refine and steer a conversation towards
+                        a desired length, format, style, level of detail, and language used. (Wikipedia)
+                    </p>
+                    <div class="border-b-black pb-3"> <a class="visit">Visit Website</a></div>
+                    <div class="img-gal mb-3">
+                        <img id="dw-image" src="/assets/images/genai/chatgpt_thumbnail.jpg" alt="chatgpt_thumbnail">
+                    </div>
+                </div>
+
+            </div>
+        </div>
+    </div>
+</div>
+<div id="tools" class="fullscreen">
+    <div class="container">
+        <h1 class="text-center main-title">GenAI Tools</h1>
+        <div class="row d-flex justify-content-center gx-2">
+              @foreach (var item in tools)
+    {
+            <div class="col-2">
+                <div class="grid-img">
+                    <img class="img-fluid" src="/assets/images/genai/@item.image" alt="thumbnail">
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <span>@item.title</span>
+                        <button class="more-detail text-uppercase" onclick="openDrawer('@item.title','@item.image','@item.wikiImage','@item.desc')">More Details</button>
+                    </div>
+                </div>
+            </div>
+    }
+       
+        </div>
+    </div>
+</div>
+<div id="organizations" class="fullscreen">
+      <div class="container">
+        <h1 class="text-center main-title">GenAI Organizations</h1>
+        <div class="row d-flex justify-content-center gx-2">
+              @foreach (var item in organizations)
+    {
+            <div class="col-2">
+                <div class="grid-img">
+                    <img class="img-fluid" src="/assets/images/genai/@item.image" alt="thumbnail">
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <span>@item.title</span>
+                        <button class="more-detail text-uppercase" onclick="openDrawer('@item.title','@item.image','@item.wikiImage','@item.desc')">More Details</button>
+                    </div>
+                </div>
+            </div>
+    }
+       
+        </div>
+    </div>
+</div>
+<div id="applications" class="fullscreen">
+      <div class="container">
+        <h1 class="text-center main-title">GenAI Applications</h1>
+        <div class="row d-flex justify-content-center gx-2">
+              @foreach (var item in applications)
+    {
+            <div class="col-2">
+                <div class="grid-img">
+                    <img class="img-fluid" src="/assets/images/genai/@item.image" alt="thumbnail">
+                    <div class="d-flex flex-column align-items-center justify-content-center">
+                        <span>@item.title</span>
+                        <button class="more-detail text-uppercase" onclick="openDrawer('@item.title','@item.image','@item.wikiImage','@item.desc')">More Details</button>
+                    </div>
+                </div>
+            </div>
+    }
+       
+        </div>
+    </div>
+</div>
+
+
+
+<script>
+ function openDrawer(title,image,wikiImage,desc) {
+    document.getElementById("dw-title").innerText = title;
+    document.getElementById("dw-image").src = "/assets/images/genai/"+image;
+    document.getElementById("dw-wikiImage").src = "/assets/images/genai/"+wikiImage;
+    document.getElementById("dw-desc").innerText = desc;
+
+    document.getElementById("drawer").style.bottom = "0px";
+
+}
+    function hideDrawer() {
+        document.getElementById("drawer").style.bottom = "-600px";
+    }
+
+</script>

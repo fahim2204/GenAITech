@@ -1,0 +1,39 @@
+﻿@{
+    ViewData["Title"] = "Jobs";
+}
+
+<link rel="stylesheet" href="https://pyscript.net/latest/pyscript.css" />
+<script defer src="https://pyscript.net/latest/pyscript.js"></script>
+
+
+<div id="job-first" class="fullscreen">
+    <div class="container">
+        <h1 class="text-center main-title mb-4">AI Jobs</h1>
+        <h3 class="text-center text-white fw-normal">AI job dataset: Insights AI-Jobs</h3>
+        <h3 class="text-center text-white fw-normal">Python source for tables and Charts: Kaggle</h3>
+    </div>
+</div>
+<div id="job-second" class="fullscreen">
+    <div class="container">
+        <div class="row d-flex justify-content-center gx-2 text-white">
+            <div id="pandas-output" class="pandas-output"></div>
+
+            <div id="pane"></div>
+            <py-config>
+                packages = [
+                "pandas",
+                "Jinja2"
+                ]
+            </py-config>
+            <py-script>
+                import pandas as pd
+                from pyodide.http import open_url
+                url = 'https://filebin.net/p617ti24px437x66/salaries2023.csv'
+                df = pd.read_csv(open_url(url))
+                pane = Element('pane')
+                pane.write(df.shape)
+
+            </py-script>
+        </div>
+    </div>
+</div>

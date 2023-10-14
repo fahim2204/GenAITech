@@ -1,0 +1,272 @@
+@import url("https://fonts.googleapis.com/css2?family=Anton&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,600;1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Niconne&display=swap");
+
+html {
+  font-size: 14px;
+}
+
+@media (min-width: 768px) {
+  html {
+    font-size: 16px;
+  }
+}
+
+body {
+}
+
+.first-bg {
+  position: relative;
+  overflow: hidden;
+  height: calc(100vh - 56px);
+}
+.first-bg::after {
+  position: absolute;
+  top: 0;
+  left: 0;
+  content: "";
+  height: 100%;
+  width: 100%;
+  background-color: rgba(1, 1, 1, 0.4);
+}
+.first-bg video {
+  width: 100vw;
+  height: 100%;
+  object-fit: cover;
+}
+.first-bg .first-content {
+  z-index: 1;
+  position: absolute;
+  top: 0;
+  left: 50%;
+  height: 100%;
+  width: 100%;
+  transform: translateX(-50%);
+}
+.main-title {
+  font-family: "Anton", "sans-serif";
+  background-image: linear-gradient(
+    to right,
+    brown,
+    brown,
+    yellow,
+    white,
+    yellow,
+    brown,
+    brown
+  );
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  -webkit-text-stroke-width: 1px;
+  -webkit-text-stroke-color: brown;
+  padding: 9vw 2vw 0vw 2vw;
+  text-align: center;
+  font-size: 8vw;
+}
+.first-bg p {
+  font-family: "Montserrat", sans-serif;
+  font-size: 2vw;
+  text-align: center;
+}
+
+.second-bg {
+  background-image: url("/assets/images/background/bg2.jpg");
+  min-height: 100dvh;
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+.second-bg .h-full {
+  min-height: 160dvh;
+}
+.border-b-yellow {
+  border-bottom: 1px solid #f7be02;
+}
+.border-b-black {
+  border-bottom: 1px solid #000000;
+}
+.title-yellow {
+  font-family: "Anton", sans-serif;
+  color: #f7be02;
+  font-size: 4vw;
+  text-shadow: 2px 2px 3px rgb(255, 255, 255);
+}
+.title-yellow-sm {
+  font-family: sans-serif;
+  color: #f7be02;
+  font-size: 2vw;
+  text-shadow: 1px 1px 3px rgb(255, 255, 255);
+}
+
+#drawer {
+  position: fixed;
+  width: 100%;
+  bottom: -600px;
+  left: 0;
+  z-index: 99;
+  transition: all 0.5s ease;
+}
+
+#drawer .container {
+  display: flex;
+  justify-content: center;
+  background-color: #222222;
+  position: relative;
+}
+#drawer .container button.close-btn {
+  position: absolute;
+  top: 5px;
+  right: 15px;
+  color: white;
+  border: none;
+  font-family: monospace;
+  font-size: 20px;
+  background-color: transparent;
+}
+#drawer .img-gal {
+  background-color: #313131;
+  padding: 5px 20px;
+}
+#drawer img.img-left {
+  max-width: 45%;
+  object-fit: contain;
+}
+#drawer .img-gal img {
+  max-width: 30%;
+  border: 1px solid #c5c5c5;
+}
+.fullscreen .grid-img {
+  position: relative;
+  width: 100%;
+}
+.fullscreen .grid-img:hover div {
+  visibility: visible;
+  opacity: 100;
+  height: 100%;
+}
+.fullscreen .grid-img div {
+  position: absolute;
+  width: 100%;
+  height: 10%;
+  background-color: rgba(0, 0, 0, 0.6);
+  visibility: hidden;
+  opacity: 0;
+  transform: translate(-50%, -50%);
+  top: 50%;
+  left: 50%;
+  transition: all 0.3s;
+}
+.fullscreen .grid-img div > span {
+  color: white;
+  font-weight: 500;
+  text-align: center;
+  border-bottom: #ecdd0c 1px solid;
+  width: 85%;
+  margin-bottom: 5px;
+}
+button.more-detail {
+  white-space: nowrap;
+  background-color: #0770f7;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  padding: 3px 8px;
+  color: white;
+  border: none;
+  font-size: 14px;
+}
+a.visit {
+  cursor: pointer;
+  white-space: nowrap;
+  background-color: #2b2b2b;
+  box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.5);
+  border-radius: 3px;
+  padding: 3px 8px;
+  color: hsl(0, 0%, 60%);
+  border: none;
+  font-size: 14px;
+}
+.fullscreen {
+  width: 100%;
+  height: 100dvh;
+  overflow-x: hidden;
+  position: relative;
+  /* background-color: #f7be02; */
+  background-attachment: fixed;
+  background-position: center;
+  background-repeat: no-repeat;
+  background-size: cover;
+}
+#tools {
+  background-image: url("/assets/images/background/bg5.jpg");
+}
+#organizations {
+  background-image: url("/assets/images/background/bg6.jpg");
+}
+#applications {
+  background-image: url("/assets/images/background/bg7.jpg");
+}
+
+/* For Contact Page */
+#contact {
+  background-image: url("/assets/images/background/bg1.jpg");
+}
+#contact .main-title {
+  -webkit-text-stroke-width: 0;
+  -webkit-text-stroke-color: transparent;
+}
+#contact .box {
+  background-color: rgba(8, 12, 76, 0.8);
+  padding: 16px 14px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+  height: 100%;
+}
+#contact .box::before {
+  content: "";
+  position: absolute;
+  bottom: 0;
+  right: -4px;
+  background-color: #cbce94;
+  width: 5px;
+  height: calc(100% - 5px);
+}
+#contact .box::after {
+  content: "";
+  position: absolute;
+  bottom: -4px;
+  right: -4px;
+  background-color: #cbce94;
+  width: calc(100% - 1px);
+  height: 5px;
+}
+#contact .box h5 {
+  width: 100%;
+  font-family: 'Niconne', arial;
+  color: #e6ec6b;
+  text-align: center;
+  padding-bottom: 5px;
+  border-bottom: 1px solid white;
+}
+#contact .box p {
+ font-size: 12px;
+color: #dadbc4 !important;
+ ;
+}
+#contact .box p>a {
+ color: #878aa9;
+}
+
+/* AI Jobs Page */
+#job-first {
+  background-image: url("/assets/images/background/bg1.jpg");
+}
+#job-second {
+  background-image: url("/assets/images/background/bg3.jpg");
+}
+
+/* @media only screen and (max-device-width: 1366px) {
+  .parallax {
+    background-attachment: scroll;
+  }
+} */
