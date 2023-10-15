@@ -26,12 +26,15 @@
                 ]
             </py-config>
             <py-script>
+                import asyncio
                 import pandas as pd
                 from pyodide.http import open_url
-                url = 'https://filebin.net/p617ti24px437x66/salaries2023.csv'
+                url =
+                'https://raw.githubusercontent.com/fahim2204/GenAITech/main/GenAITech/wwwroot/assets/csv/salaries2023.csv'
                 df = pd.read_csv(open_url(url))
+                df=df.drop('Unnamed: 0', axis=1)
                 pane = Element('pane')
-                pane.write(df.shape)
+                pane.write(df)
 
             </py-script>
         </div>

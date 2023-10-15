@@ -22,7 +22,7 @@ namespace GenAITech.Data.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
-            modelBuilder.Entity("GenAITech.Models.GenAI", b =>
+            modelBuilder.Entity("GenAITech.Models.GenAISite", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
@@ -31,21 +31,16 @@ namespace GenAITech.Data.Migrations
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
                     b.Property<string>("AnchorLink")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
-
-                    b.Property<int>("Dislike")
-                        .HasColumnType("int");
 
                     b.Property<string>("GenAIName")
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
                     b.Property<string>("ImageFilename")
-                        .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<int>("Like")
+                    b.Property<int?>("Like")
                         .HasColumnType("int");
 
                     b.Property<string>("Summary")
@@ -54,7 +49,7 @@ namespace GenAITech.Data.Migrations
 
                     b.HasKey("Id");
 
-                    b.ToTable("GenAIs");
+                    b.ToTable("GenAISites");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>

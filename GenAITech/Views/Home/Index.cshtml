@@ -1,6 +1,13 @@
-﻿@{
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@model IEnumerable<GenAITech.Models.GenAISite>
+
+@{
     ViewData["Title"] = "Artificial Intelligence -AI";
 }
+
+
 
 <div class="container-fluid px-0">
     <div class="first-bg">
@@ -31,8 +38,10 @@
                         techniques to process and comprehend input data, subsequently producing meaningful responses.
                     </p>
                     <div class="text-white">
-                        <span class="fst-italic">Scribehow</span> 
-                        <a href="/Home/GenAI/#tools" class="border border-white rounded-1 text-decoration-none text-white px-1 fs-6">Read More</a>
+                        <span class="fst-italic">Scribehow</span>
+                        <a href="/Home/GenAI/#tools"
+                            class="border border-white rounded-1 text-decoration-none text-white px-1 fs-6">Read
+                            More</a>
                     </div>
                 </div>
                 <div class="col-6">
@@ -71,8 +80,10 @@
                         models on which services like ChatGPT and others depend.
                     </p>
                     <div class="text-white">
-                        <span class="fst-italic">Gartner</span> 
-                        <a href="/Home/GenAI/#organizations" class="border border-white rounded-1 text-decoration-none text-white px-1 fs-6">Read More</a>
+                        <span class="fst-italic">Gartner</span>
+                        <a href="/Home/GenAI/#organizations"
+                            class="border border-white rounded-1 text-decoration-none text-white px-1 fs-6">Read
+                            More</a>
                     </div>
                 </div>
             </div>
@@ -88,8 +99,10 @@
                         Video: Make-A-Video (Meta Platforms).
                     </p>
                     <div class="text-white">
-                        <span class="fst-italic">Wikipedia</span> 
-                        <a href="/Home/GenAI/#applications" class="border border-white rounded-1 text-decoration-none text-white px-1 fs-6">Read More</a>
+                        <span class="fst-italic">Wikipedia</span>
+                        <a href="/Home/GenAI/#applications"
+                            class="border border-white rounded-1 text-decoration-none text-white px-1 fs-6">Read
+                            More</a>
                     </div>
                 </div>
                 <div class="col-6">
@@ -106,7 +119,7 @@
                 </div>
             </div>
         </div>
-        <div class="container h-full pb-5">
+        <div class="container h-full last pb-5">
             <div class="row py-5 border-bottom border-top">
                 <div class="col-6">
                     <div class="row w-100 gx-3">
@@ -133,7 +146,37 @@
                 </div>
             </div>
             <h1 class="title-yellow text-center mt-5">List of Generative AI Websites</h1>
-            <p class="text-center text-white">Please <a class="text-secondary" href="/Identity/Account/Login">login</a> or <a class="text-secondary" href="/Identity/Account/Register">register</a> to add a new generative Al website.</p>
+            @if (SignInManager.IsSignedIn(User))
+            {
+                <p class="text-center">
+                    <a class="text-secondary" asp-controller="GenAISites" asp-action="Create">Click here to
+                        add a new generative AI website.</a>
+                </p>
+            }
+            else
+            {
+                <p class="text-center text-white">Please <a class="text-secondary" href="/Identity/Account/Login">login</a>
+                    or <a class="text-secondary" href="/Identity/Account/Register">register</a> to add a new generative Al
+                    website.</p>
+
+            }
+            @if (Model != null)
+            {
+                <div class="row w-100 g-3 mt-5">
+                    @foreach (var item in Model)
+                    {
+
+                        <div class="col-2">
+                            <a class="text-decoration-none" href="/GenAISites/#@item.AnchorLink">
+                                <div class="ai-block">
+                                    <h5 class="text-center">@Html.DisplayFor(modelItem => item.GenAIName)</h5>
+                                    <img src="/images/@item.ImageFilename" alt="">
+                                </div>
+                            </a>
+                        </div>
+                    }
+                </div>
+            }
 
         </div>
     </div>

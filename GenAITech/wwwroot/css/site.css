@@ -11,7 +11,12 @@ html {
     font-size: 16px;
   }
 }
-
+a{
+  color: unset !important;
+}
+.text-secondary{
+  color: hsl(208, 7%, 75%) !important;
+}
 body {
 }
 
@@ -80,6 +85,44 @@ body {
 .second-bg .h-full {
   min-height: 160dvh;
 }
+.second-bg .h-full.last {
+  min-height: 95dvh;
+}
+.second-bg .ai-block {
+  background: rgb(130, 131, 132);
+  background: linear-gradient(
+    90deg,
+    rgba(130, 131, 132, 1) 0%,
+    rgba(255, 255, 255, 0.9) 50%,
+    rgba(130, 131, 132, 1) 100%
+  );
+  padding: 15px 10px;
+  height: 165px;
+  position: relative;
+}
+.second-bg .ai-block > h5 {
+  color: #2e2e97;
+  text-shadow: 2px 2px 3px rgb(255, 255, 255);
+  font-size: 22px;
+  z-index: 10;
+  text-transform: uppercase;
+}
+.second-bg .ai-block > img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+  opacity: 0;
+  transition: all 2s linear;
+  object-fit: cover;
+  cursor: pointer;
+}
+.second-bg .ai-block > img:hover {
+  opacity: 100;
+}
+
 .border-b-yellow {
   border-bottom: 1px solid #f7be02;
 }
@@ -188,7 +231,7 @@ a.visit {
 }
 .fullscreen {
   width: 100%;
-  height: 100dvh;
+  min-height: 100dvh;
   overflow-x: hidden;
   position: relative;
   /* background-color: #f7be02; */
@@ -242,19 +285,18 @@ a.visit {
 }
 #contact .box h5 {
   width: 100%;
-  font-family: 'Niconne', arial;
+  font-family: "Niconne", arial;
   color: #e6ec6b;
   text-align: center;
   padding-bottom: 5px;
   border-bottom: 1px solid white;
 }
 #contact .box p {
- font-size: 12px;
-color: #dadbc4 !important;
- ;
+  font-size: 12px;
+  color: #dadbc4 !important;
 }
-#contact .box p>a {
- color: #878aa9;
+#contact .box p > a {
+  color: #878aa9;
 }
 
 /* AI Jobs Page */
@@ -263,6 +305,34 @@ color: #dadbc4 !important;
 }
 #job-second {
   background-image: url("/assets/images/background/bg3.jpg");
+}
+
+/* GenAI CRUD */
+#add-genai {
+  background-image: url("/assets/images/background/bg2.jpg");
+}
+#genai-index {
+  background-image: url("/assets/images/background/bg2.jpg");
+}
+.genai-grid {
+  height: 100%;
+  width: 100%;
+  padding: 30px 35px;
+}
+.blue-title {
+  color: #2e2e97;
+  text-shadow: 2px 2px 3px rgb(255, 255, 255);
+  font-size: 26px;
+  z-index: 10;
+  text-transform: uppercase;
+}
+.genai-grid.even {
+  background: #ff9d38;
+  background: linear-gradient(180deg, #ff9d38 1%, #ffffff 30%, #ffffff 100%);
+}
+.genai-grid.odd {
+  background: #3a37fe;
+  background: linear-gradient(180deg, #3a37fe 1%, #ffffff 30%, #ffffff 100%);
 }
 
 /* @media only screen and (max-device-width: 1366px) {

@@ -10,6 +10,6 @@ namespace GenAITech.Data
             : base(options)
         {
         }
-        public DbSet<GenAI> GenAIs { get; set; }
+        public DbSet<GenAISite> GenAISites { get; set; }
     }
 }

@@ -1,0 +1,51 @@
+﻿@using Microsoft.AspNetCore.Identity
+@inject SignInManager<IdentityUser> SignInManager
+
+@model IEnumerable<GenAITech.Models.GenAISite>
+
+@{
+    ViewData["Title"] = "Index";
+    var index = 0;
+}
+
+<div id="genai-index" class="fullscreen">
+    <div class="container-fluid">
+        <h1 class="text-center main-title">Generative AI Websites</h1>
+        @if (SignInManager.IsSignedIn(User))
+        {
+            <p class="text-center">
+                <a class="text-secondary" asp-controller="GenAISites" asp-action="Create">Click here to
+                    add a new generative AI website.</a>
+            </p>
+        }
+        else
+        {
+            <p class="text-center text-white">Please <a class="text-secondary" href="/Identity/Account/Login">login</a>
+                or <a class="text-secondary" href="/Identity/Account/Register">register</a> to add a new generative Al
+                website.</p>
+
+        }
+        <div class="row mt-5">
+            @foreach (var item in Model)
+            {
+                <div class="col-4 p-0">
+                    <div class="w-100 h-100"><img class="object-fit-cover w-100 h-100" src="/images/@item.ImageFilename"
+                            alt=""></div>
+                </div>
+                <div class="col-8 p-0">
+                    <div id="@item.AnchorLink" class="genai-grid @(index % 2 == 0 ? "even" : "odd")">
+                        <h5 class="text-center blue-title mb-4">@Html.DisplayFor(modelItem => item.GenAIName)</h5>
+                        <p>@Html.DisplayFor(modelItem => item.Summary)</p>
+
+                        <div class="flex mt-4 text-white">
+                            <button class="btn btn-primary px-3 py-1">Like (@Html.DisplayFor(modelItem => item.Like))</button>
+                            <a class="btn btn-success px-3 py-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                            <a class="btn btn-danger px-3 py-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        </div>
+                    </div>
+                </div>
+                index++;
+            }
+        </div>
+    </div>
+</div>
