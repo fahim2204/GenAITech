@@ -1,5 +1,6 @@
 ﻿@using Microsoft.AspNetCore.Identity
 @inject SignInManager<IdentityUser> SignInManager
+@inject UserManager<IdentityUser> UserManager
 
 @model IEnumerable<GenAITech.Models.GenAISite>
 
@@ -37,10 +38,17 @@
                         <h5 class="text-center blue-title mb-4">@Html.DisplayFor(modelItem => item.GenAIName)</h5>
                         <p>@Html.DisplayFor(modelItem => item.Summary)</p>
 
-                        <div class="flex mt-4 text-white">
-                            <button class="btn btn-primary px-3 py-1">Like (@Html.DisplayFor(modelItem => item.Like))</button>
-                            <a class="btn btn-success px-3 py-1" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
-                            <a class="btn btn-danger px-3 py-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                        <div class="d-flex mt-4 text-white">
+                            <form method="post" asp-action="Like" asp-route-id="@item.Id">
+                                <input type="hidden" name="id" value="@item.Id" />
+                                <input type="hidden" name="AnchorLink" value="@item.AnchorLink" />
+                                <button type="submit" class="btn btn-primary px-3 py-1">Like (@item.Like)</button>
+                            </form>
+                            @if (User.IsInRole("Admin"))
+                            {
+                                <a class="btn btn-success px-3 py-1 mx-2" asp-action="Edit" asp-route-id="@item.Id">Edit</a>
+                                <a class="btn btn-danger px-3 py-1" asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+                            }
                         </div>
                     </div>
                 </div>

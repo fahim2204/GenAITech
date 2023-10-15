@@ -1,5 +1,6 @@
 ﻿using GenAITech.Data;
 using GenAITech.Models;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
@@ -10,11 +11,13 @@ namespace GenAITech.Controllers
     {
         private readonly ApplicationDbContext _context;
         private readonly ILogger<HomeController> _logger;
+        private readonly SignInManager<IdentityUser> _signInManager;
 
-        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger)
+        public HomeController(ApplicationDbContext context, ILogger<HomeController> logger, SignInManager<IdentityUser> signInManager)
         {
-            _context = context; 
+            _context = context;
             _logger = logger;
+            _signInManager = signInManager;
         }
 
 
@@ -47,6 +50,19 @@ namespace GenAITech.Controllers
         {
             return View();
         }
+        public async Task<IActionResult> Logout()
+        {
+            Console.WriteLine("hello");
+            foreach (var cookie in Request.Cookies.Keys)
+            {
+                Response.Cookies.Delete(cookie);
+            }
+            // Sign out the user
+            await _signInManager.SignOutAsync();
+
+            return RedirectToAction("Index", "Home");
+        }
+
 
         [ResponseCache(Duration = 0, Location = ResponseCacheLocation.None, NoStore = true)]
         public IActionResult Error()

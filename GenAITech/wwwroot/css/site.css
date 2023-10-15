@@ -18,8 +18,67 @@ a{
   color: hsl(208, 7%, 75%) !important;
 }
 body {
+  background-color: #222222;
+  overflow-x: hidden;
 }
-
+.navbar.bg-dark{
+  background-color: #000000 !important;
+}
+footer{
+  background-color: #000000 !important;
+}
+h1{
+  color: #fff;
+  font-size: 32px;
+}
+#account .checkbox{
+  color: #fff;
+  margin-bottom: 15px;
+}
+#registerForm,#account{
+  margin-left: 5px;
+}
+#registerForm>h2,#account>h2{
+  margin-top: 20px;
+  font-size: 22px;
+  color: #fff;
+}
+#registerForm>hr,#account>hr{
+  color: #f9f903;
+  padding: 0;
+  margin: 0;
+}
+#registerForm .form-floating .form-control,
+#account .form-floating .form-control
+{
+  margin: 15px 0px;
+}
+#registerSubmit,#login-submit{
+  padding: 5px 0px;
+  font-size: 16px;
+}
+.col-md-6.col-md-offset-2{
+  color: #fff;
+}
+.col-md-6.col-md-offset-2 h3{
+  font-family: sans-serif;
+  color: #f9f903;
+  font-size: 2vw;
+  text-shadow: 1px 1px 4px rgb(255, 255, 255);
+}
+.col-md-6.col-md-offset-2 hr{
+  color: #f9f903;
+  height: 2px;
+  padding: 0;
+  margin: 0;
+}
+.col-md-6.col-md-offset-2 p>a,
+#account div p{
+  color: rgba(130, 131, 132, 1) !important;
+}
+#account div p:first-child{
+  margin-top: 25px;
+}
 .first-bg {
   position: relative;
   overflow: hidden;

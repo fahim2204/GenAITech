@@ -5,6 +5,9 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>@ViewData["Title"] - GenAITech</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.6.0/css/font-awesome.css"
+        integrity="sha512-CB+XYxRC7cXZqO/8cP3V+ve2+6g6ynOnvJD6p4E4y3+wwkScH9qEOla+BTHzcwB4xKgvWn816Iv0io5l3rAOBA=="
+        crossorigin="anonymous" referrerpolicy="no-referrer" />
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
     <link rel="stylesheet" href="~/GenAITech.styles.css" asp-append-version="true" />
@@ -14,7 +17,7 @@
     <header>
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-dark bg-dark">
             <div class="container-fluid">
-                <a class="navbar-brand" asp-area="" asp-controller="Home" asp-action="Index">AI</a>
+                <a class="navbar-brand text-white" asp-area="" asp-controller="Home" asp-action="Index">AI</a>
                 <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse"
                     aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                     <span class="navbar-toggler-icon"></span>
@@ -45,11 +48,50 @@
         @RenderBody()
     </main>
 
-    @* <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2023 - GenAITech - <a asp-area="" asp-controller="Home" asp-action="Privacy">Privacy</a>
+    <footer class="text-muted mt-auto">
+        <div class="container-fluid px-4 py-3">
+            <div class="row text-white">
+                <div class="col-6">
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <a class="text-decoration-none" href="/">Home</a>
+                        </div>
+                        <div class="col-6">
+                            <a class="text-decoration-none" href="/Home/Jobs">Jobs</a>
+                        </div>
+                        <div class="col-6">
+                            <a class="text-decoration-none" href="/GenAISites">Gen AI Sites</a>
+                        </div>
+                        <div class="col-6">
+                            <a class="text-decoration-none" href="/Home/Contact">Contact</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-6">
+                    <div class="row g-2">
+                        <div class="col-6">
+                            <a class="text-decoration-none" href="/Home/Contact">About Us</a>
+                        </div>
+                        <div class="col-6">
+                            Follow Us
+                        </div>
+                        <div class="col-6">
+                            <a class="text-decoration-none" href="/Home/Contact">Copyright Info</a>
+                        </div>
+                        <div class="col-6">
+                            <div class="flex">
+                                <a href="#"><i class="fa fa-google" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-youtube" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-twitter" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-facebook" aria-hidden="true"></i></a>
+                                <a href="#"><i class="fa fa-linkedin" aria-hidden="true"></i></a>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
-    </footer> *@
+    </footer>
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>

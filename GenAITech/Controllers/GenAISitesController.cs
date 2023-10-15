@@ -7,6 +7,7 @@ using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.EntityFrameworkCore;
 using GenAITech.Data;
 using GenAITech.Models;
+using Microsoft.AspNetCore.Authorization;
 
 namespace GenAITech.Controllers
 {
@@ -38,13 +39,21 @@ namespace GenAITech.Controllers
         // GET: GenAISites
         public async Task<IActionResult> Index()
         {
-            return _context.GenAISites != null ?
-                        View(await _context.GenAISites.ToListAsync()) :
-                        Problem("Entity set 'ApplicationDbContext.GenAISites'  is null.");
+            if (_context.GenAISites != null)
+            {
+                // Sort the data by SomeProperty and then convert it to a list
+                var sortedData = await _context.GenAISites.OrderByDescending(item => item.Like).ToListAsync();
+                return View(sortedData);
+            }
+            else
+            {
+                return Problem("Entity set 'ApplicationDbContext.GenAISites' is null.");
+            }
         }
 
 
         // GET: GenAISites/Create
+        [Authorize]
         public IActionResult Create()
         {
             return View();
@@ -53,6 +62,7 @@ namespace GenAITech.Controllers
         // POST: GenAISites/Create
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
+        [Authorize]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Create([Bind("GenAIName,Summary")] GenAISite genAISite, IFormFile ImageFilename)
         {
@@ -92,6 +102,7 @@ namespace GenAITech.Controllers
         }
 
         // GET: GenAISites/Edit/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Edit(int? id)
         {
             if (id == null || _context.GenAISites == null)
@@ -110,6 +121,7 @@ namespace GenAITech.Controllers
         // POST: GenAISites/Edit/5
         // To protect from overposting attacks, enable the specific properties you want to bind to.
         [HttpPost]
+        [Authorize(Roles = "Admin")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Edit(int id, [Bind("Id,GenAIName,Summary,AnchorLink,Like")] GenAISite genAISite, IFormFile ImageFilename)
         {
@@ -117,60 +129,98 @@ namespace GenAITech.Controllers
             {
                 return NotFound();
             }
-            var newGenAISite = await _context.GenAISites.FindAsync(id);
-            if (genAISite?.ImageFilename != null)
-            {
-                string imageFileName = genAISite.ImageFilename;
-                string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", imageFileName);
-                if (System.IO.File.Exists(imagePath))
-                {
-                    System.IO.File.Delete(imagePath);
-                }
-            }
-            if (ImageFilename != null)
-            {
-                string uniqueFileName = GetUniqueFileName(ImageFilename.FileName);
-                string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", uniqueFileName);
 
-                string? directoryPath = Path.GetDirectoryName(imagePath);
-                if (!string.IsNullOrEmpty(directoryPath))
-                {
-                    Directory.CreateDirectory(directoryPath);
-                }
+            var existingGenAISite = await _context.GenAISites.FindAsync(id);
 
-                using (var stream = new FileStream(imagePath, FileMode.Create))
-                {
-                    await ImageFilename.CopyToAsync(stream);
-                }
-                genAISite.ImageFilename = uniqueFileName;
-            }
-            ModelState.Clear();
-            TryValidateModel(genAISite);
-
-            if (ModelState.IsValid)
+            if (existingGenAISite != null)
             {
-                try
+                if (ImageFilename != null)
                 {
-                    _context.Update(genAISite);
-                    await _context.SaveChangesAsync();
-                }
-                catch (DbUpdateConcurrencyException)
-                {
-                    if (!GenAISiteExists(genAISite.Id))
+                    // Delete the old image if a new image is being uploaded
+                    if (!string.IsNullOrEmpty(existingGenAISite.ImageFilename))
                     {
-                        return NotFound();
+                        string oldImagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", existingGenAISite.ImageFilename);
+                        if (System.IO.File.Exists(oldImagePath))
+                        {
+                            System.IO.File.Delete(oldImagePath);
+                        }
                     }
-                    else
+
+                    string uniqueFileName = GetUniqueFileName(ImageFilename.FileName);
+                    string imagePath = Path.Combine(_webHostEnvironment.WebRootPath, "images", uniqueFileName);
+
+                    string directoryPath = Path.GetDirectoryName(imagePath);
+                    if (!string.IsNullOrEmpty(directoryPath))
                     {
-                        throw;
+                        Directory.CreateDirectory(directoryPath);
+                    }
+
+                    using (var stream = new FileStream(imagePath, FileMode.Create))
+                    {
+                        await ImageFilename.CopyToAsync(stream);
+                    }
+                    existingGenAISite.ImageFilename = uniqueFileName;
+                }
+
+                // Update other properties
+                existingGenAISite.GenAIName = genAISite.GenAIName;
+                existingGenAISite.Summary = genAISite.Summary;
+                existingGenAISite.AnchorLink = genAISite.AnchorLink;
+                existingGenAISite.Like = genAISite.Like;
+
+                ModelState.Clear();
+                TryValidateModel(existingGenAISite);
+
+                if (ModelState.IsValid)
+                {
+                    try
+                    {
+                        _context.Update(existingGenAISite);
+                        await _context.SaveChangesAsync();
+                        return RedirectToAction(nameof(Index));
+                    }
+                    catch (DbUpdateConcurrencyException)
+                    {
+                        if (!GenAISiteExists(existingGenAISite.Id))
+                        {
+                            return NotFound();
+                        }
+                        else
+                        {
+                            throw;
+                        }
                     }
                 }
-                return RedirectToAction(nameof(Index));
             }
             return View(genAISite);
         }
+        [Authorize]
+        public async Task<IActionResult> Like(int id, string AnchorLink)
+        {
+            if (User.Identity.IsAuthenticated)
+            {
+                var likeKey = $"Like_{id}";
+
+                if (!Request.Cookies.ContainsKey(likeKey))
+                {
+                    var genAISite = await _context.GenAISites.FindAsync(id);
+                    if (genAISite != null)
+                    {
+                        genAISite.Like++;
+                        await _context.SaveChangesAsync();
+                        Response.Cookies.Append(likeKey, "true");
+                        string anchorLink = genAISite.AnchorLink;
+                        return Redirect($"/GenAISites/#{anchorLink}");
+                    }
+                }
+            }
+
+            // If the user is not authenticated or has already liked the item, redirect back to the view
+            return Redirect($"/GenAISites/#{AnchorLink}");
+        }
 
         // GET: GenAISites/Delete/5
+        [Authorize(Roles = "Admin")]
         public async Task<IActionResult> Delete(int? id)
         {
             if (id == null || _context.GenAISites == null)
@@ -189,6 +239,7 @@ namespace GenAITech.Controllers
         }
 
         // POST: GenAISites/Delete/5
+        [Authorize(Roles = "Admin")]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> DeleteConfirmed(int id)
