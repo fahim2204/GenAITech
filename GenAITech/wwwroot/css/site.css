@@ -11,74 +11,78 @@ html {
     font-size: 16px;
   }
 }
-a{
+a {
   color: unset !important;
 }
-.text-secondary{
+.text-secondary {
   color: hsl(208, 7%, 75%) !important;
 }
 body {
   background-color: #222222;
   overflow-x: hidden;
 }
-.navbar.bg-dark{
+.navbar.bg-dark {
   background-color: #000000 !important;
 }
-footer{
+footer {
   background-color: #000000 !important;
 }
-h1{
+h1 {
   color: #fff;
   font-size: 32px;
 }
-#account .checkbox{
+#account .checkbox {
   color: #fff;
   margin-bottom: 15px;
 }
-#registerForm,#account{
+#registerForm,
+#account {
   margin-left: 5px;
 }
-#registerForm>h2,#account>h2{
+#registerForm > h2,
+#account > h2 {
   margin-top: 20px;
   font-size: 22px;
   color: #fff;
 }
-#registerForm>hr,#account>hr{
+#registerForm > hr,
+#account > hr {
   color: #f9f903;
   padding: 0;
   margin: 0;
 }
 #registerForm .form-floating .form-control,
-#account .form-floating .form-control
-{
+#account .form-floating .form-control {
   margin: 15px 0px;
 }
-#registerSubmit,#login-submit{
+#registerSubmit,
+#login-submit {
   padding: 5px 0px;
   font-size: 16px;
 }
-.col-md-6.col-md-offset-2{
+.col-md-6.col-md-offset-2 {
   color: #fff;
 }
-.col-md-6.col-md-offset-2 h3{
+.col-md-6.col-md-offset-2 h3 {
   font-family: sans-serif;
   color: #f9f903;
   font-size: 2vw;
   text-shadow: 1px 1px 4px rgb(255, 255, 255);
 }
-.col-md-6.col-md-offset-2 hr{
+.col-md-6.col-md-offset-2 hr {
   color: #f9f903;
   height: 2px;
   padding: 0;
   margin: 0;
 }
-.col-md-6.col-md-offset-2 p>a,
-#account div p{
+.col-md-6.col-md-offset-2 p > a,
+#account div p {
   color: rgba(130, 131, 132, 1) !important;
 }
-#account div p:first-child{
+#account div p:first-child {
   margin-top: 25px;
 }
+
 .first-bg {
   position: relative;
   overflow: hidden;
@@ -284,7 +288,7 @@ a.visit {
   box-shadow: 1px 1px 4px 1px rgba(0, 0, 0, 0.5);
   border-radius: 3px;
   padding: 3px 8px;
-  color: hsl(0, 0%, 60%);
+  color: hsl(0, 0%, 60%) !important;
   border: none;
   font-size: 14px;
 }
@@ -373,6 +377,7 @@ a.visit {
 #genai-index {
   background-image: url("/assets/images/background/bg2.jpg");
 }
+
 .genai-grid {
   height: 100%;
   width: 100%;
@@ -392,6 +397,51 @@ a.visit {
 .genai-grid.odd {
   background: #3a37fe;
   background: linear-gradient(180deg, #3a37fe 1%, #ffffff 30%, #ffffff 100%);
+}
+
+@media (min-width: 576px) and (max-width: 767px) {
+  .first-bg {
+    height: 100%;
+  }
+  .title-yellow {
+    font-size: 7vw;
+  }
+  #contact .box {
+    margin-top: 20px;
+    border: none;
+  }
+  #contact .box::before {
+    display: none;
+  }
+  #contact .box::after {
+    display: none;
+  }
+  #drawer .container {
+    max-height: 450px;
+    overflow-y: scroll;
+  }
+}
+@media (max-width: 576px) {
+  .first-bg {
+    height: 100%;
+  }
+  .title-yellow {
+    font-size: 8vw;
+  }
+  #contact .box {
+    margin-top: 20px;
+    border: none;
+  }
+  #contact .box::before {
+    display: none;
+  }
+  #contact .box::after {
+    display: none;
+  }
+  #drawer .container {
+    max-height: 450px;
+    overflow-y: scroll;
+  }
 }
 
 /* @media only screen and (max-device-width: 1366px) {

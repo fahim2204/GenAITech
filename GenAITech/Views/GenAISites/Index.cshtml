@@ -29,11 +29,12 @@
         <div class="row mt-5">
             @foreach (var item in Model)
             {
-                <div class="col-4 p-0">
-                    <div class="w-100 h-100"><img class="object-fit-cover w-100 h-100" src="/images/@item.ImageFilename"
-                            alt=""></div>
+                <div class="col-md-4 p-0">
+                    <div class="image-container">
+                        <img src="/images/@item.ImageFilename" alt="">
+                    </div>
                 </div>
-                <div class="col-8 p-0">
+                <div class="col-md-8 p-0">
                     <div id="@item.AnchorLink" class="genai-grid @(index % 2 == 0 ? "even" : "odd")">
                         <h5 class="text-center blue-title mb-4">@Html.DisplayFor(modelItem => item.GenAIName)</h5>
                         <p>@Html.DisplayFor(modelItem => item.Summary)</p>
@@ -57,3 +58,46 @@
         </div>
     </div>
 </div>
+
+
+<script>
+    function updateBackground() {
+        var imageContainers = document.querySelectorAll(".image-container");
+        var windowWidth = window.innerWidth || document.documentElement.clientWidth;
+
+        imageContainers.forEach(function (container) {
+            var img = container.querySelector("img");
+            var imgSrc = img.getAttribute("src");
+
+            if (windowWidth > 576 && windowWidth < 768) {
+                container.style.backgroundImage = "url(" + imgSrc + ")";
+                container.style.backgroundSize = "contain";
+                container.style.backgroundRepeat = "repeat";
+                container.style.height = "190px";
+                img.style.display = "none";
+            } 
+            else if (windowWidth < 576) {
+                container.style.backgroundImage = "url(" + imgSrc + ")";
+                container.style.backgroundSize = "contain";
+                container.style.backgroundRepeat = "repeat";
+                container.style.height = "150px";
+                img.style.display = "none";
+            }
+            else {
+                container.style.backgroundImage = "none";
+                container.style.backgroundRepeat = "no-repeat";
+                img.style.display = "block";
+                container.style.height = "100%";
+                img.style.height = "100%";
+                img.style.width = "100%";
+                img.style.objectFit = "cover";
+            }
+        });
+    }
+
+    // Call the function on page load and when the window is resized
+    window.addEventListener("load", updateBackground);
+    window.addEventListener("resize", updateBackground);
+
+
+</script>

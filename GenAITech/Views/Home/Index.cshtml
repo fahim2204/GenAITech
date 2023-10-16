@@ -30,8 +30,8 @@
 
     <div class="second-bg">
         <div class="container h-full pb-5">
-            <div class="row py-5 border-bottom">
-                <div class="col-6">
+            <div class="row py-5 border-bottom g-4">
+                <div class="col-md-6">
                     <h1 class="title-yellow">GenAI Tools</h1>
                     <p class="text-white fs-5 mb-1">Generative AI tools refer to software or systems that use neural
                         network
@@ -44,7 +44,7 @@
                             More</a>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6">
                     <div class="row w-100 gx-3">
                         <div class="col-6 d-flex justify-content-center">
                             <img class="img-fluid border" src="./assets/images/genai/bard_thumbnail.jpg"
@@ -59,8 +59,8 @@
             </div>
         </div>
         <div class="container h-full pb-5">
-            <div class="row py-5 border-bottom border-top">
-                <div class="col-6">
+            <div class="row py-5 border-bottom border-top g-4">
+                <div class="col-md-6">
                     <div class="row w-100 gx-3">
                         <div class="col-6 d-flex justify-content-center">
                             <img class="img-fluid border" src="./assets/images/genai/ms_thumbnail.jpg"
@@ -72,7 +72,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6">
                     <h1 class="title-yellow">GenAI Organisations</h1>
                     <p class="text-white fs-5 mb-1">Generative AI Organizations like Microsoft, Google, Amazon and IBM
                         have
@@ -89,8 +89,8 @@
             </div>
         </div>
         <div class="container h-full pb-5">
-            <div class="row py-5 border-bottom border-top">
-                <div class="col-6">
+            <div class="row py-5 border-bottom border-top g-4">
+                <div class="col-md-6">
                     <h1 class="title-yellow">GenAI Applications</h1>
                     <p class="text-white fs-5 mb-1">
                         Text: GPT-3, LaMDA, LLaMA, BLOOM and GPT-4.<br />
@@ -105,7 +105,7 @@
                             More</a>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6">
                     <div class="row w-100 gx-3">
                         <div class="col-6 d-flex justify-content-center">
                             <img class="img-fluid border" src="./assets/images/genai/chatgpt_thumbnail.jpg"
@@ -120,8 +120,8 @@
             </div>
         </div>
         <div class="container h-full last pb-5">
-            <div class="row py-5 border-bottom border-top">
-                <div class="col-6">
+            <div class="row py-5 border-bottom border-top g-4">
+                <div class="col-md-6">
                     <div class="row w-100 gx-3">
                         <div class="col-6 d-flex justify-content-center">
                             <img class="img-fluid border" src="./assets/images/genaisites/pie.jpg" alt="pie">
@@ -131,7 +131,7 @@
                         </div>
                     </div>
                 </div>
-                <div class="col-6">
+                <div class="col-md-6">
                     <h1 class="title-yellow">AI Jobs</h1>
                     <p class="text-white fs-5 mb-1">
                         The prime source for jobs and talents in AI, ML, Data Science and Big Data: <a
@@ -162,11 +162,11 @@
             }
             @if (Model != null)
             {
-                <div class="row w-100 g-3 mt-5">
+                <div class="row g-3 mt-5">
                     @foreach (var item in Model)
                     {
 
-                        <div class="col-2">
+                        <div class="col-6 col-sm-4 col-md-2">
                             <a class="text-decoration-none" href="/GenAISites/#@item.AnchorLink">
                                 <div class="ai-block">
                                     <h5 class="text-center">@Html.DisplayFor(modelItem => item.GenAIName)</h5>
