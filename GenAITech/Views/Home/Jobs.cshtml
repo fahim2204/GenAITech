@@ -6,37 +6,89 @@
 <script defer src="https://pyscript.net/latest/pyscript.js"></script>
 
 
+
 <div id="job-first" class="fullscreen">
-    <div class="container">
+    <div class="container pb-4">
         <h1 class="text-center main-title mb-4">AI Jobs</h1>
         <h3 class="text-center text-white fw-normal">AI job dataset: Insights AI-Jobs</h3>
         <h3 class="text-center text-white fw-normal">Python source for tables and Charts: Kaggle</h3>
     </div>
 </div>
 <div id="job-second" class="fullscreen">
-    <div class="container">
-        <div class="row d-flex justify-content-center gx-2 text-white">
-            <div id="pandas-output" class="pandas-output"></div>
+    <div class="container pt-3">
+        <div class="row d-flex justify-content-center g-0 g-md-3 text-white">
+            <div class="col-md-3">
+                <div class="job-box">
+                    <h3 class="title-yellow-md text-center">Top 5 companies</h3>
+                    <p class="text-center">according to number of employes</p>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="py-output" id="output-table"></div>
+            </div>
+            <hr class="d-block d-md-none text-warning border border-warning my-3">
+            <div class="col-md-9">
+                <div class="py-output" id="output-pie"></div>
+            </div>
+            <div class="col-md-3">
+                <div class="job-box">
+                    <h3 class="title-yellow-md text-center">Job distribution</h3>
+                    <p class="text-center">among top 70 in demand job title</p>
+                </div>
+            </div>
+            <hr class="d-block d-md-none text-warning border border-warning my-3">
 
-            <div id="pane"></div>
+            <div class="col-md-3">
+                <div class="job-box">
+                    <h3 class="title-yellow-md text-center">Salaries</h3>
+                    <p class="text-center">in the last 3 years</p>
+                </div>
+            </div>
+            <div class="col-md-9">
+                <div class="py-output" id="output-bar"></div>
+            </div>
+
             <py-config>
-                packages = [
-                "pandas",
-                "Jinja2"
-                ]
+                packages = ["matplotlib", "pandas", "seaborn"]
             </py-config>
             <py-script>
-                import asyncio
                 import pandas as pd
+                import numpy as np
+                import matplotlib.pyplot as plt
+                import seaborn as sns
                 from pyodide.http import open_url
-                url =
-                'https://raw.githubusercontent.com/fahim2204/GenAITech/main/GenAITech/wwwroot/assets/csv/salaries2023.csv'
-                df = pd.read_csv(open_url(url))
-                df=df.drop('Unnamed: 0', axis=1)
-                pane = Element('pane')
-                pane.write(df)
+
+                url = open_url('/assets/csv/salaries2023.csv')
+                df = pd.read_csv(url)
+
+                # Top 5 Head Table
+                display(df.head(n=5), target="output-table", append=False)
+
+                # Pie Chart
+                top_jobs = df.job_title.value_counts()[:7]
+                m = df.shape[0]
+                job_distribution = top_jobs * 100 / m
+                plt.figure(figsize=(18, 8))
+                plt.pie(job_distribution, labels=top_jobs.index, autopct='%1.0f%%')
+                plt.title('Job distribution among top 10 in-demand job titles')
+                display(plt, target="output-pie", append=False)
+
+                plt.clf()
+
+                # Bar Chart
+                df['work_year'] = pd.Categorical(df['work_year'])
+                sns.set_palette("Set1")
+                plt.figure(figsize=(18, 8))
+                sns.barplot(x='work_year', y='salary_in_usd', data=df, hue='work_year', dodge=False, palette='Set1')
+                plt.title("Salaries")
+                display(plt, target="output-bar", append=False)
+
+
+
 
             </py-script>
+
+
         </div>
     </div>
 </div>

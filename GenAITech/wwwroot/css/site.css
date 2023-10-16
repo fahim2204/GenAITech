@@ -160,13 +160,13 @@ h1 {
     rgba(130, 131, 132, 1) 100%
   );
   padding: 15px 10px;
-  height: 165px;
+  height: 160px;
   position: relative;
 }
 .second-bg .ai-block > h5 {
   color: #2e2e97;
   text-shadow: 2px 2px 3px rgb(255, 255, 255);
-  font-size: 22px;
+  font-size: 18px;
   z-index: 10;
   text-transform: uppercase;
 }
@@ -197,6 +197,12 @@ h1 {
   color: #f7be02;
   font-size: 4vw;
   text-shadow: 2px 2px 3px rgb(255, 255, 255);
+}
+.title-yellow-md {
+  font-family: "Anton", sans-serif;
+  color: #f7be02;
+  font-size: 3vw;
+  text-shadow: 1px 1px 3px rgb(255, 255, 255);
 }
 .title-yellow-sm {
   font-family: sans-serif;
@@ -369,6 +375,58 @@ a.visit {
 #job-second {
   background-image: url("/assets/images/background/bg3.jpg");
 }
+.py-terminal {
+  display: none;
+}
+.py-output {
+  width: 100%;
+}
+#output-pie > img {
+  max-width: 100%;
+  width: 100%;
+}
+#output-table {
+  overflow-y: scroll;
+  font-size: 10px;
+}
+#output-table table,
+td,
+th {
+  border: 1px solid black;
+}
+#output-table table {
+  border-collapse: collapse;
+  width: 100%;
+}
+#output-table th,
+td {
+  padding: 4px;
+  text-align: center;
+}
+#output-table th {
+  background-color: navy;
+  color: yellow;
+  text-align: center;
+}
+#output-table tr {
+  background-color: white;
+  color: navy;
+}
+#output-table tr:hover {
+  background-color: #f5f5f5;
+}
+
+#output-bar > img {
+  max-width: 100%;
+  width: 100%;
+}
+.job-box {
+  background-color: rgba(8, 12, 76, 0.8);
+  padding: 16px 14px 30px;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  position: relative;
+  height: 100%;
+}
 
 /* GenAI CRUD */
 #add-genai {
@@ -403,7 +461,13 @@ a.visit {
   .first-bg {
     height: 100%;
   }
+  #job-first {
+    min-height: 100% !important;
+  }
   .title-yellow {
+    font-size: 7vw;
+  }
+  .title-yellow-md {
     font-size: 7vw;
   }
   #contact .box {
@@ -425,7 +489,13 @@ a.visit {
   .first-bg {
     height: 100%;
   }
+  #job-first {
+    min-height: 100% !important;
+  }
   .title-yellow {
+    font-size: 8vw;
+  }
+  .title-yellow-md {
     font-size: 8vw;
   }
   #contact .box {
